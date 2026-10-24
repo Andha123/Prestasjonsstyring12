@@ -1,0 +1,34 @@
+name: Hold Supabase våken
+
+on:
+  schedule:
+    - cron: '17 6 */3 * *'
+  workflow_dispatch:
+
+permissions: {}
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    env:
+      SUPABASE_URL: https://vvhvyrzorlvduozpttji.supabase.co
+      SUPABASE_PUBLISHABLE_KEY: sb_publishable_HyfnVPf0dDQOCvSPFPBEfQ_v19IJOIt
+    steps:
+      - name: Spør databasen om de offentlige innstillingene
+        run: |
+          for forsok in 1 2 3; do
+            svar=$(curl -sS --max-time 30 -X POST "$SUPABASE_URL/rest/v1/rpc/public_settings" \
+              -H "apikey: $SUPABASE_PUBLISHABLE_KEY" \
+              -H "Content-Type: application/json" \
+              -d '{}' -w '\n%{http_code}') || svar=$'\n000'
+            kode=$(echo "$svar" | tail -n1)
+            if [ "$kode" = "200" ] && echo "$svar" | grep -q '"registration_open"'; then
+              echo "Supabase svarte (HTTP 200) – databasen er våken."
+              exit 0
+            fi
+            echo "Forsøk $forsok: HTTP $kode – prøver igjen om 60 sekunder."
+            sleep 60
+          done
+          echo "::error::Supabase svarte ikke. Sjekk prosjektet i supabase.com/dashboard."
+          exit 1
