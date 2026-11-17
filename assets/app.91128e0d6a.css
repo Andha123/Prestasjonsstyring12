@@ -5309,3 +5309,298 @@ mark.sok-mark { box-shadow: 0 0 0 3px color-mix(in srgb, #ffd54a 45%, transparen
 @media print { .formelark, .formelark-knapp { display: none; } }
 body.fa-open .main { padding-right: min(424px, 34vw); }
 @media (max-width: 760px) { body.fa-open .main { padding-right: 0; padding-bottom: 48vh; } }
+
+/* ---------------------------------------------------------------- Eksamenssett (eksamensformatet) */
+.case-split {
+  display: grid;
+  grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+  gap: 22px;
+  align-items: start;
+}
+.case-split.no-case {
+  grid-template-columns: minmax(0, 1fr);
+}
+.case-split .case-left {
+  position: sticky;
+  top: calc(var(--topbar-h, 64px) + 12px);
+  max-height: calc(100vh - var(--topbar-h, 64px) - 24px);
+  overflow: auto;
+  overscroll-behavior: contain;
+}
+.case-split .case-left table {
+  font-size: 0.95em;
+}
+.case-split .case-left th,
+.case-split .case-left td {
+  padding: 7px 8px;
+}
+.case-split .case-left thead th {
+  text-transform: none;
+  letter-spacing: 0;
+  font-size: 0.85rem;
+}
+td.n {
+  white-space: nowrap;
+}
+.case-split .case-right {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  min-width: 0;
+}
+.case-split .case-part:first-of-type {
+  border-top: 0;
+  padding-top: 0;
+}
+.part-points {
+  font-weight: 650;
+  color: var(--ink-2);
+  margin: -2px 0 6px;
+}
+.part-got {
+  font-weight: 500;
+  color: var(--ink-3);
+}
+@media (max-width: 860px) {
+  .case-split {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .case-split .case-left {
+    position: static;
+    max-height: none;
+  }
+}
+.word-limit.over {
+  color: var(--bad, #b42318);
+  font-weight: 650;
+}
+table.classify {
+  width: 100%;
+  border-collapse: collapse;
+}
+table.classify th,
+table.classify td {
+  border: 1px solid var(--line);
+  padding: 10px 12px;
+}
+table.classify thead th {
+  background: var(--surface-2);
+  font-weight: 600;
+  text-align: center;
+}
+table.classify tbody th {
+  text-align: left;
+  font-weight: 500;
+}
+table.classify td {
+  text-align: center;
+  width: 22%;
+}
+table.classify input[type='radio'] {
+  width: 20px;
+  height: 20px;
+  accent-color: var(--accent);
+  cursor: pointer;
+}
+table.classify tr.cl-ok th {
+  box-shadow: inset 3px 0 0 var(--ok, #12805c);
+}
+table.classify tr.cl-bad th {
+  box-shadow: inset 3px 0 0 var(--bad, #b42318);
+}
+.cl-fasit {
+  display: block;
+  font-size: 0.9em;
+  color: var(--ink-3);
+}
+.exam-info {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 14px 22px;
+}
+.exam-info h3 {
+  font-size: var(--fs-m);
+  margin-bottom: 6px;
+}
+.exam-info ul {
+  margin: 0;
+  padding-left: 1.1em;
+}
+.exam-info li + li {
+  margin-top: 4px;
+}
+.exam-info.compact {
+  margin-top: 10px;
+  font-size: 0.95em;
+}
+.exam-info-card {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: flex-start;
+}
+.mode-exam .exam-band .exam-info-btn {
+  color: var(--exam-band-ink);
+  border-color: currentColor;
+  background: transparent;
+}
+.mode-exam .exam-band .exam-info-btn.on {
+  background: rgba(255, 255, 255, 0.16);
+}
+.q-title-text {
+  font-weight: 600;
+}
+.q-points {
+  color: var(--ink-3);
+  font-weight: 500;
+}
+.small {
+  font-size: 0.9em;
+}
+.exam-grade {
+  margin-top: 8px;
+}
+.exam-grade p {
+  margin: 4px 0;
+}
+.grade-letter {
+  display: inline-grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: var(--exam);
+  color: #fff;
+  font-size: 1.5rem;
+  font-weight: 750;
+  vertical-align: middle;
+  margin-right: 6px;
+}
+.tag-ai {
+  font-size: 0.8em;
+  margin-left: 6px;
+}
+.exam-band-tools {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-left: auto;
+}
+.mode-exam .exam-band .formelark-knapp {
+  color: var(--exam-band-ink);
+  border-color: currentColor;
+  background: transparent;
+}
+.mode-exam .exam-band .formelark-knapp[aria-expanded='true'] {
+  background: rgba(255, 255, 255, 0.16);
+}
+/* Under prøven ligger formelarket i eksamenslinjen; ikke vis en knapp til inne i oppgaven. */
+.mode-exam .qcard .formelark-knapp {
+  display: none;
+}
+@media (max-width: 1500px) {
+  body.fa-open .case-split {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  body.fa-open .case-split .case-left {
+    position: static;
+    max-height: none;
+  }
+}
+/* Én tallrute per deloppgave i eksamensformatet: ingen stegnummer, og formatråd står på informasjonssiden. */
+.case-split .step-n,
+.case-split .calc > .hint {
+  display: none;
+}
+
+/* Prøveeksamen: én startknapp, statistikk og liste over leverte eksamener. */
+.exam-start-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+}
+.exam-start-row p {
+  margin: 0;
+  max-width: 62ch;
+}
+.btn-start {
+  font-size: 1.05rem;
+  padding: 12px 26px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+@media (max-width: 620px) {
+  .exam-start-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+.exam-stats .stats-grid {
+  margin-top: 6px;
+}
+.stat-value.up {
+  color: var(--ok);
+}
+.stat-value.down {
+  color: var(--bad);
+}
+.exam-stat-block {
+  margin-top: 20px;
+}
+.exam-stat-block h3 {
+  font-size: 1rem;
+  margin: 0 0 8px;
+}
+.exam-stat-cols {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+  gap: 0 28px;
+}
+.exam-stat-table th[scope='row'] {
+  font-weight: 500;
+}
+.exam-stat-table td.num {
+  white-space: nowrap;
+}
+.exam-stat-table .actions-cell {
+  width: 1%;
+}
+.meter.bad span {
+  background: var(--bad);
+}
+.grade-chip {
+  display: inline-grid;
+  place-items: center;
+  min-width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  background: var(--exam);
+  color: #fff;
+  font-weight: 700;
+}
+details.older-exams > summary {
+  cursor: pointer;
+  font-weight: 600;
+}
+details.older-exams[open] > summary {
+  margin-bottom: 10px;
+}
+
+/* Rekkefølge: hva som skal stå øverst og nederst. */
+.ord-end {
+  margin: 6px 0;
+  font-size: var(--fs-s);
+  color: var(--ink-2);
+}
+.ord-end span[aria-hidden] {
+  color: var(--brand);
+  font-size: 0.8em;
+  margin-right: 2px;
+}
+.ord-end-top {
+  margin-top: 4px;
+}
+.exam-stats .spark {
+  max-width: 560px;
+}
