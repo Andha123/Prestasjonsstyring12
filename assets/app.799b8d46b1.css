@@ -5604,3 +5604,45 @@ details.older-exams[open] > summary {
 .exam-stats .spark {
   max-width: 560px;
 }
+
+/* Kort kompendium: spørsmål og korte svar, ordliste, «På eksamen». */
+.kp-kort .kp-figur { max-width: 640px; }
+.kp-qa { max-width: 75ch; margin: 0 0 12px; }
+.kp-qa:last-child { margin-bottom: 0; }
+.kp-qa-q { margin: 0 0 2px; font-weight: 650; color: var(--ink); }
+.kp-qa-a { margin: 0; line-height: 1.6; }
+.kp-ord { margin: 0; display: grid; gap: 6px; max-width: 78ch; }
+.kp-ord > div { display: grid; grid-template-columns: minmax(150px, 30%) 1fr; gap: 12px; padding: 6px 0; border-bottom: 1px solid var(--line); }
+.kp-ord > div:last-child { border-bottom: 0; }
+.kp-ord dt { font-weight: 650; }
+.kp-ord dd { margin: 0; line-height: 1.5; color: var(--ink-2); }
+@media (max-width: 560px) {
+  .kp-ord > div { grid-template-columns: 1fr; gap: 2px; }
+}
+.kp-eksamen { padding: 10px 14px; border-radius: 12px; background: var(--exam-soft, var(--accent-soft)); max-width: 78ch; }
+.kp-eksamen-t { margin: 0 0 4px; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.07em; text-transform: uppercase; color: var(--exam, var(--brand)); }
+.kp-eksamen p:last-child { margin: 0; line-height: 1.55; }
+.kp-formler-tema > summary { cursor: pointer; font-weight: 600; color: var(--ink-2); }
+.kp-formler-tema[open] > summary { margin-bottom: 8px; }
+@media print {
+  /* Formlene står samlet i formelarket bakerst i PDF-en. */
+  html.kp-utskrift .kp-formler-tema { display: none !important; }
+}
+
+/* «Dette bør du øve på» fra egen AI etter prøveeksamen (src/ui/AiFocus.tsx) */
+.ai-focus { margin-top: 16px; }
+.exam-stats .ai-focus { box-shadow: none; border: 1px solid var(--line); }
+.ai-focus-head { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
+.ai-focus-head h3 { margin: 0; }
+.ai-focus-list { list-style: none; margin: 12px 0 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+.ai-focus-item { display: flex; gap: 12px; justify-content: space-between; align-items: flex-start; padding: 12px 14px; border-radius: 14px; background: var(--surface-2); border-left: 4px solid var(--line-2); }
+.ai-focus-item.hoy { border-left-color: var(--i-peach); }
+.ai-focus-body { min-width: 0; }
+.ai-focus-body p { margin: 0; }
+.ai-focus-meta { font-size: var(--fs-s); }
+.ai-focus-text { margin: 4px 0 !important; font-weight: 600; overflow-wrap: anywhere; }
+.ai-focus-actions { display: flex; gap: 6px; flex-shrink: 0; }
+.ai-focus-actions .btn { min-height: 36px; padding: 4px 12px; }
+@media (max-width: 560px) {
+  .ai-focus-item { flex-direction: column; }
+}
