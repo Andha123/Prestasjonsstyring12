@@ -5611,6 +5611,10 @@ details.older-exams[open] > summary {
 .kp-qa:last-child { margin-bottom: 0; }
 .kp-qa-q { margin: 0 0 2px; font-weight: 650; color: var(--ink); }
 .kp-qa-a { margin: 0; line-height: 1.6; }
+.kp-qa-a p { margin: 0; }
+.kp-qa-a .table-wrap { margin: 0.5em 0; max-width: 100%; }
+.kp-qa-a table { width: auto; }
+.kp-qa-a ol, .kp-qa-a ul { margin: 0.4em 0; }
 .kp-ord { margin: 0; display: grid; gap: 6px; max-width: 78ch; }
 .kp-ord > div { display: grid; grid-template-columns: minmax(150px, 30%) 1fr; gap: 12px; padding: 6px 0; border-bottom: 1px solid var(--line); }
 .kp-ord > div:last-child { border-bottom: 0; }
@@ -5627,4 +5631,97 @@ details.older-exams[open] > summary {
 @media print {
   /* Formlene står samlet i formelarket bakerst i PDF-en. */
   html.kp-utskrift .kp-formler-tema { display: none !important; }
+}
+
+/* «Dette bør du øve på» fra egen AI etter prøveeksamen (src/ui/AiFocus.tsx) */
+.ai-focus { margin-top: 16px; }
+.exam-stats .ai-focus { box-shadow: none; border: 1px solid var(--line); }
+.ai-focus-head { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
+.ai-focus-head h3 { margin: 0; }
+.ai-focus-list { list-style: none; margin: 12px 0 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+.ai-focus-item { display: flex; gap: 12px; justify-content: space-between; align-items: flex-start; padding: 12px 14px; border-radius: 14px; background: var(--surface-2); border-left: 4px solid var(--line-2); }
+.ai-focus-item.hoy { border-left-color: var(--i-peach); }
+.ai-focus-body { min-width: 0; }
+.ai-focus-body p { margin: 0; }
+.ai-focus-meta { font-size: var(--fs-s); }
+.ai-focus-text { margin: 4px 0 !important; font-weight: 600; overflow-wrap: anywhere; }
+.ai-focus-actions { display: flex; gap: 6px; flex-shrink: 0; }
+.ai-focus-actions .btn { min-height: 36px; padding: 4px 12px; }
+@media (max-width: 560px) {
+  .ai-focus-item { flex-direction: column; }
+}
+
+/* Slik ser et A-svar ut (skriveoppgavene i prøveeksamenene) */
+.asvar-list {
+  margin: 0.5rem 0 1rem;
+  padding-left: 1.4rem;
+  display: grid;
+  gap: 0.75rem;
+}
+.asvar-list > li > p {
+  margin: 0.15rem 0;
+}
+.asvar-detail {
+  color: var(--ink-2);
+}
+.asvar-ca {
+  display: grid;
+  gap: 0.3rem;
+  margin-top: 0.35rem;
+  padding: 0.5rem 0.65rem;
+  border-left: 3px solid var(--line, #ddd);
+  background: var(--surface-2, transparent);
+  border-radius: 0 6px 6px 0;
+}
+.asvar-ca p {
+  margin: 0;
+}
+.asvar-ca .tag {
+  margin-right: 0.35rem;
+}
+.asvar-ai-task + .asvar-ai-task {
+  margin-top: 0.9rem;
+}
+.asvar-ai-h {
+  margin: 0.4rem 0 0.35rem;
+  font-size: 1rem;
+}
+.asvar-ai-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.3rem;
+}
+.asvar-ai-list li {
+  display: flex;
+  gap: 0.5rem;
+  align-items: baseline;
+}
+.asvar-mark {
+  flex: none;
+  display: inline-grid;
+  place-items: center;
+  width: 1.35rem;
+  height: 1.35rem;
+  border-radius: 50%;
+  font-size: 0.8rem;
+  font-weight: 700;
+  line-height: 1;
+  transform: translateY(0.15rem);
+}
+.asvar-har .asvar-mark {
+  background: var(--ok-soft);
+  color: var(--ok);
+}
+.asvar-delvis .asvar-mark {
+  background: var(--warn-soft);
+  color: var(--warn);
+}
+.asvar-mangler .asvar-mark {
+  background: var(--exam-soft);
+  color: var(--exam);
+}
+.asvar-ai .hint {
+  margin-bottom: 0.6rem;
 }
